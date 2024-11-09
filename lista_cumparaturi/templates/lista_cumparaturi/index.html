@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Cumpărături</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Lista de Cumpărături</h1>
+    <div class="text-center">
+        <a href="{% url 'adauga_produs' %}" class="btn btn-primary mb-4">Adaugă Produs</a>
+    </div>
+    <table class="table table-striped text-center">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nume</th>
+                <th>Acțiuni</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for produs in produse %}
+            <tr>
+                <td>{{ produs.id }}</td>
+                <td class="{% if produs.cumparat %}cumparat{% endif %}">{{ produs.nume }}</td>
+                <td>
+                    {% if not produs.cumparat %}
+                    <a href="{% url 'marcheaza_cumparat' produs.id %}" class="btn btn-success btn-sm">Marchează Cumpărat</a>
+                    {% endif %}
+                    <a href="{% url 'sterge_produs' produs.id %}" class="btn btn-danger btn-sm">Șterge</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="text-muted">Nu există produse în lista de cumpărături.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

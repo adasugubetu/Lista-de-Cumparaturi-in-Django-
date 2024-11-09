@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaugă Produs</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Adaugă un Produs Nou</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="nume">Nume Produs:</label>
+                <input type="text" class="form-control" id="nume" name="nume" required>
+            </div>
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary">Adaugă</button>
+                <a href="{% url 'index' %}" class="btn btn-secondary">Înapoi la Listă</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
